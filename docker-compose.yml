@@ -1,0 +1,23 @@
+services:
+  ops-agent:
+    build: .
+    image: ops-agent:local
+    container_name: ops-agent
+    restart: unless-stopped
+    environment:
+      - DEEPSEEK_API_KEY=${DEEPSEEK_API_KEY}
+      - FEISHU_APP_ID=${FEISHU_APP_ID:-}
+      - FEISHU_APP_SECRET=${FEISHU_APP_SECRET:-}
+      - FEISHU_ENCRYPT_KEY=${FEISHU_ENCRYPT_KEY:-}
+      - FEISHU_VERIFICATION_TOKEN=${FEISHU_VERIFICATION_TOKEN:-}
+      - FEISHU_NOTIFY_CHAT_ID=${FEISHU_NOTIFY_CHAT_ID:-}
+      - FEISHU_WEBHOOK_URL=${FEISHU_WEBHOOK_URL}
+    volumes:
+      - /var/log:/var/log:ro
+      - ./reports:/home/ops/reports
+      - ./memory:/app/memory
+      - ./nodes.json:/app/nodes.json:ro
+      - ~/.ssh/ops_agent_ed25519:/home/ops/.ssh/ops_agent_ed25519:ro
+    ports:
+      - "18790:18790"
+      - "8787:8787"

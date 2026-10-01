@@ -1,0 +1,14 @@
+{
+  "mcpServers": {
+    "brown-lab-ops": {
+      "command": "docker",
+      "args": [
+        "exec",
+        "-i",
+        "ops-agent",
+        "python",
+        "/app/ops_mcp_server.py"
+      ]
+    }
+  }
+}

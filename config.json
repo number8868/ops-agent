@@ -1,0 +1,81 @@
+{
+  "providers": {
+    "deepseek": {
+      "apiKey": "${DEEPSEEK_API_KEY}"
+    }
+  },
+  "agents": {
+    "defaults": {
+      "model": "deepseek-v4-flash",
+      "provider": "deepseek",
+      "workspace": "/app/memory",
+      "timezone": "America/New_York"
+    }
+  },
+  "gateway": {
+    "host": "0.0.0.0",
+    "port": 18790,
+    "heartbeat": {
+      "enabled": true,
+      "intervalS": 1800,
+      "keepRecentMessages": 8
+    }
+  },
+  "channels": {
+    "api": {
+      "enabled": true,
+      "host": "0.0.0.0",
+      "port": 8787,
+      "allowFrom": [
+        "web-ui"
+      ],
+      "sendProgress": false,
+      "sendToolHints": false,
+      "senderId": "web-ui",
+      "sessionPrefix": "dashboard",
+      "timeoutS": 180,
+      "statusPath": "/home/ops/reports/latest.json",
+      "clusterStatusPath": "/home/ops/reports/cluster_latest.json"
+    },
+    "feishu": {
+      "enabled": false,
+      "appId": "${FEISHU_APP_ID}",
+      "appSecret": "${FEISHU_APP_SECRET}",
+      "encryptKey": "${FEISHU_ENCRYPT_KEY}",
+      "verificationToken": "${FEISHU_VERIFICATION_TOKEN}",
+      "allowFrom": [
+        "*"
+      ],
+      "groupPolicy": "mention",
+      "replyToMessage": true,
+      "streaming": true,
+      "domain": "feishu"
+    }
+  },
+  "tools": {
+    "exec": {
+      "enabled": true
+    },
+    "web": {
+      "enabled": true
+    },
+    "mcpServers": {
+      "brown_lab_ops": {
+        "type": "stdio",
+        "command": "python",
+        "args": [
+          "/app/ops_mcp_server.py"
+        ],
+        "toolTimeout": 45,
+        "enabledTools": [
+          "get_cluster_status",
+          "run_light_inspection",
+          "get_daily_report",
+          "record_incident",
+          "list_recent_incidents",
+          "generate_candidate_skill"
+        ]
+      }
+    }
+  }
+}

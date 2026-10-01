@@ -1,0 +1,27 @@
+{
+  "mode": "local-first",
+  "current": {
+    "id": "local-machine",
+    "type": "local",
+    "enabled": true,
+    "description": "Current MVP target. Collect metrics from the local Docker/Nanobot host."
+  },
+  "futureNodes": [
+    {
+      "id": "gpu-node-01",
+      "type": "ssh",
+      "enabled": false,
+      "host": "gpu-node-01.example.edu",
+      "gpuType": "A100",
+      "description": "Future Brown lab GPU node."
+    },
+    {
+      "id": "gpu-node-02",
+      "type": "sidecar",
+      "enabled": false,
+      "host": "gpu-node-02.example.edu",
+      "gpuType": "H100",
+      "description": "Future Brown lab GPU node."
+    }
+  ]
+}

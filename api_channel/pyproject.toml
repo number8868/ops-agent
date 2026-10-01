@@ -1,0 +1,9 @@
+[project]
+name = "nanobot-api-channel"
+version = "0.1.0"
+description = "Local HTTP API channel for the Nanobot ops dashboard"
+requires-python = ">=3.11"
+dependencies = ["aiohttp>=3.9"]
+
+[project.entry-points."nanobot.channels"]
+api = "nanobot_api_channel.channel:ApiChannel"
